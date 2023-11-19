@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stickhero.stickherofinal.SceneController">
+   <children>
+      <Button layoutX="257.0" layoutY="163.0" mnemonicParsing="false" onAction="#switchToGamePlay" text="Resume" />
+      <Button layoutX="251.0" layoutY="254.0" mnemonicParsing="false" onAction="#switchToMain" text="Save Game" />
+      <Button layoutX="274.0" layoutY="301.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button layoutX="245.0" layoutY="208.0" mnemonicParsing="false" onAction="#switchToGamePlay" text="Restart Level" />
+      <Button layoutX="483.0" layoutY="41.0" mnemonicParsing="false" text="Settings" />
+   </children>
+</AnchorPane>
