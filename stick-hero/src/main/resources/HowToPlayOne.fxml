@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SceneController">
+   <children>
+      <Label layoutX="251.0" layoutY="41.0" text="How to Play">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="200.0" layoutX="137.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="337.0" />
+      <Button layoutX="420.0" layoutY="343.0" mnemonicParsing="false" onAction="#switchToHowToPlayTwo" prefHeight="26.0" prefWidth="54.0" text="Next" />
+      <Button layoutX="137.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToMain" text="Back" />
+   </children>
+</AnchorPane>
