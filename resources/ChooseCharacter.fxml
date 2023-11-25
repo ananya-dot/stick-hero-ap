@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SceneController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SceneController">
     <children>
         <Label layoutX="247.0" layoutY="41.0" text="Choose Avatar">
             <font>
@@ -13,17 +15,17 @@
             </font>
         </Label>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="111.0" layoutX="138.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-        <Button layoutX="288.0" layoutY="239.0" mnemonicParsing="false" onAction="#switchToHowToPlayTwo" text="Ron" />
-        <Button layoutX="156.0" layoutY="237.0" mnemonicParsing="false" onAction="#switchToMain" text="Harry" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="111.0" layoutX="264.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="111.0" layoutX="387.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
-      <Button layoutX="397.0" layoutY="239.0" mnemonicParsing="false" onAction="#switchToHowToPlayTwo" text="Hermione" />
-      <TextField layoutX="300.0" layoutY="313.0" />
-      <Label layoutX="159.0" layoutY="312.0" text="Enter Name">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Button layoutX="509.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToHowToPlayTwo" text="Next" />
+        <Button layoutX="288.0" layoutY="239.0" mnemonicParsing="false" text="Ron" />
+        <Button layoutX="156.0" layoutY="239.0" mnemonicParsing="false" text="Harry" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="111.0" layoutX="264.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dcdee1" height="111.0" layoutX="387.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+        <Button layoutX="397.0" layoutY="239.0" mnemonicParsing="false" text="Hermione" />
+        <TextField layoutX="300.0" layoutY="313.0" />
+        <Label layoutX="159.0" layoutY="312.0" text="Enter Name">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <Button layoutX="509.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToGamePlay" text="Next" />
     </children>
 </AnchorPane>
