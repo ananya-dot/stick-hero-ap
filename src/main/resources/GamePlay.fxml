@@ -23,7 +23,7 @@
             <Image url="@images/harryWalk1.png" />
          </image>
       </ImageView>
-      <Line fx:id="stick" endX="-100.0" endY="-22.0" layoutX="155.0" layoutY="241.0" startX="-100.0" stroke="#f8f6f6" strokeWidth="3.0" />
-      <Button layoutX="272.0" layoutY="260.0" mnemonicParsing="false" onMousePressed="#onMousePressed" onMouseReleased="#grow" text="grow" />
+      <Line fx:id="stick" endX="-100.0" endY="-7.0" layoutX="155.0" layoutY="241.0" startX="-100.0" stroke="#175feb" strokeWidth="3.0" />
+      <Button layoutX="272.0" layoutY="260.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
    </children>
 </AnchorPane>
