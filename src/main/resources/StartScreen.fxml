@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.SceneController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@images/mainGameBackground.png" />
+         </image>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="275.0" layoutY="243.0" onMouseClicked="#switchToChooseCharacter" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/playButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="49.0" fitWidth="184.0" layoutX="224.0" layoutY="313.0" onMouseClicked="#switchToHowToPlayOne" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/howToPlayButton.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
