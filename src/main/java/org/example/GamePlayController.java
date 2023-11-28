@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
@@ -34,6 +35,7 @@ public class GamePlayController {
     private Line stick;
     private double y;
     private boolean isMousePressed;
+    private Timeline fallTimeline;
 
     private Timeline growTimeline;
     private long startTime;
@@ -58,6 +60,7 @@ public class GamePlayController {
     public void stopGrowing(MouseEvent event) {
 
         stopGrowTimeline();
+        startFallTimeline();
         System.out.println("stopped");
     }
 
@@ -65,7 +68,6 @@ public class GamePlayController {
 
     private void startGrowTimeline() {
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
-            // Increase the length of the stick
             stick.setEndY(stick.getEndY() - 5);
         }));
         growTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -95,5 +97,40 @@ public class GamePlayController {
 
         return growTimeline != null && growTimeline.getStatus() == Timeline.Status.RUNNING;
     }
+
+
+    private void startFallTimeline() {
+        double centerX = stick.getStartX();
+        double centerY = stick.getStartY();
+        double radius = stick.getEndY(); // Use the length of the stick as the radius
+
+        fallTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+
+            double angle = 90.0;
+            double newX = centerX + radius * Math.cos(angle);
+            double newY = centerY + radius * Math.sin(angle);
+
+            double rotationAngle = Math.toDegrees(Math.atan2(newY - centerY, newX - centerX));
+            stick.getTransforms().clear();
+            stick.getTransforms().add(new Rotate(rotationAngle, centerX, centerY));
+
+            stick.setEndX(newX);
+            stick.setEndY(newY);
+
+            if (stick.getEndY() - centerY >= radius) {
+                stopFallTimeline();
+            }
+        }));
+        fallTimeline.setCycleCount(Timeline.INDEFINITE);
+
+        fallTimeline.play();
+    }
+
+    private void stopFallTimeline() {
+        if (fallTimeline != null) {
+            fallTimeline.stop();
+        }
+    }
+
 
 }
