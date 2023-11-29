@@ -22,7 +22,7 @@ public class SceneController {
 
     private Button exitButton;
 
-    public void switchToMain(ActionEvent event) throws IOException {
+    public void switchToMain(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("StartScreen.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
