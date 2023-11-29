@@ -33,6 +33,7 @@ public class GamePlayController {
 //    private Stick stick;
     @FXML
     private Line stick;
+    private double lengthOfStick;
     private double y;
     private boolean isMousePressed;
     private Timeline fallTimeline;
@@ -71,6 +72,7 @@ public class GamePlayController {
     private void startGrowTimeline() {
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
+//            lengthOfStick = stick.getEndY() - stick.getStartY();
         }));
         growTimeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -105,6 +107,7 @@ public class GamePlayController {
         double centerX = stick.getStartX();
         double centerY = stick.getStartY();
         double radius = stick.getEndY(); // Use the length of the stick as the radius
+        lengthOfStick = radius;
 
         fallTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
@@ -119,12 +122,14 @@ public class GamePlayController {
             stick.setEndY(centerY);
 
             if (stick.getEndY() - centerY >= radius) {
+
                 stopFallTimeline();
             }
         }));
         fallTimeline.setCycleCount(Timeline.INDEFINITE);
 
         fallTimeline.play();
+
     }
 
     private void stopFallTimeline() {
@@ -133,24 +138,32 @@ public class GamePlayController {
         }
     }
 
-    private void moveHarry() {
-        moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
-            // Move the character to the end of the stick
-            double characterX = stick.getEndX() - harry.getBoundsInLocal().getWidth() / 2;
-            double characterY = stick.getEndY() - harry.getBoundsInLocal().getHeight() / 2;
 
-            // Ensure the character remains within the visible area
-            characterX = Math.max(0, Math.min(characterX, gamePlayRoot.getWidth() - harry.getBoundsInLocal().getWidth()));
-            characterY = Math.max(0, Math.min(characterY, gamePlayRoot.getHeight() - harry.getBoundsInLocal().getHeight()));
+    @FXML
+    private void moveHarry() {
+
+        double endX = stick.getStartX();
+//        System.out.println(lengthOfStick);
+//        System.out.println(endX);
+        System.out.println(harry.getX());
+        moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
+            double characterX = - 1 * stick.getEndX(); // - harry.getBoundsInLocal().getWidth() / 2;
+            double characterY = stick.getEndY(); // - harry.getBoundsInLocal().getHeight() / 2;
+
+
+//            characterX = Math.max(0, Math.min(characterX, gamePlayRoot.getWidth() - harry.getBoundsInLocal().getWidth()));
+//            characterY = Math.max(0, Math.min(characterY, gamePlayRoot.getHeight() - harry.getBoundsInLocal().getHeight()));
+
+            System.out.println(characterX + "  " + characterY);
 
             harry.setX(characterX);
             harry.setY(characterY);
         }));
-        moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
-
-        // Start the timeline to move the character
+        moveCharacterTimeline.setCycleCount(1);
         moveCharacterTimeline.play();
+
     }
+
 
 
 }

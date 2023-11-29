@@ -15,9 +15,6 @@
             <Image url="@images/chooseCharacterBg.png" />
          </image>
       </ImageView>
-        <Button layoutX="289.0" layoutY="239.0" mnemonicParsing="false" text="Ron" />
-        <Button layoutX="106.0" layoutY="239.0" mnemonicParsing="false" text="Harry" />
-        <Button layoutX="448.0" layoutY="239.0" mnemonicParsing="false" text="Hermione" />
         <TextField layoutX="300.0" layoutY="313.0" />
         <Label layoutX="159.0" layoutY="312.0" text="Enter Name" textFill="#f8f5f5">
             <font>
@@ -25,5 +22,20 @@
             </font>
         </Label>
         <Button layoutX="509.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#switchToGamePlay" text="Next" />
+      <ImageView fitHeight="24.0" fitWidth="94.0" layoutX="88.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/harryButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="94.0" layoutX="276.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ronButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="106.0" layoutX="437.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/hermioneButton.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
