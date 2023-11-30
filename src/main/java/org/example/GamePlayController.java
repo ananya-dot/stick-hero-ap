@@ -1,7 +1,6 @@
 package org.example;
 
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -15,12 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 import javafx.util.Duration;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class GamePlayController {
@@ -52,9 +49,7 @@ public class GamePlayController {
 
     public void grow(MouseEvent event) {
         startTime = System.currentTimeMillis();
-
-
-        startGrowTimeline();
+        startGrowTimeline(startTime);
     }
 
     @FXML
@@ -64,12 +59,17 @@ public class GamePlayController {
         stopGrowTimeline();
         startFallTimeline();
         moveHarry();
-        System.out.println("stopped");
+//        startMoveCharacterTimeline();
+//        System.out.println("stopped");
     }
 
 
 
-    private void startGrowTimeline() {
+    private void startGrowTimeline(long startTime) {
+        System.out.println("start x of stick - " + stick.getStartX());
+        System.out.println("start y of stick - " + stick.getStartY());
+        System.out.println("end x of stick - " + stick.getEndX());
+        System.out.println("end y of stick - " + stick.getEndY());
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
 //            lengthOfStick = stick.getEndY() - stick.getStartY();
@@ -79,7 +79,7 @@ public class GamePlayController {
         growTimeline.setOnFinished(e -> {
             if (isMousePressed()) {
                 long currentTime = System.currentTimeMillis();
-                long elapsedTime = currentTime - startTime;
+                long elapsedTime = currentTime - this.startTime;
                 int cycles = (int) (elapsedTime / 50);
                 growTimeline.setCycleCount(cycles);
                 growTimeline.playFromStart();
@@ -141,28 +141,44 @@ public class GamePlayController {
 
     @FXML
     private void moveHarry() {
-
-        double endX = stick.getStartX();
-//        System.out.println(lengthOfStick);
-//        System.out.println(endX);
-        System.out.println(harry.getX());
-        moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
-            double characterX = - 1 * stick.getEndX(); // - harry.getBoundsInLocal().getWidth() / 2;
-            double characterY = stick.getEndY(); // - harry.getBoundsInLocal().getHeight() / 2;
+        double endX = -1 * stick.getEndY();
+        System.out.println("end x stick - " + stick.getEndX());
+        System.out.println("end y stick - " + stick.getEndY());
 
 
-//            characterX = Math.max(0, Math.min(characterX, gamePlayRoot.getWidth() - harry.getBoundsInLocal().getWidth()));
-//            characterY = Math.max(0, Math.min(characterY, gamePlayRoot.getHeight() - harry.getBoundsInLocal().getHeight()));
+        // Calculate the total distance to move the character
+        double totalDistance = -1 * stick.getEndY() - harry.getX();
 
-            System.out.println(characterX + "  " + characterY);
+        moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+            // Calculate the distance to move in each frame
+            double moveStep = 5.0;
 
-            harry.setX(characterX);
-            harry.setY(characterY);
+            // Check if there is still distance to cover
+            if (Math.abs(totalDistance) >= moveStep) {
+                // Update the position of the character based on the moveStep
+                if (totalDistance > 0) {
+                    harry.setX(harry.getX() + moveStep);
+                } else {
+                    harry.setX(harry.getX() - moveStep);
+                }
+            }
+
+            if(harry.getX() >= totalDistance) stopMoveCharacterTimeline();
         }));
-        moveCharacterTimeline.setCycleCount(1);
-        moveCharacterTimeline.play();
+        moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
 
+
+        moveCharacterTimeline.play();
     }
+
+    private void stopMoveCharacterTimeline() {
+        // Stop the move character timeline
+        if (moveCharacterTimeline != null) {
+            moveCharacterTimeline.stop();
+        }
+    }
+
+
 
 
 

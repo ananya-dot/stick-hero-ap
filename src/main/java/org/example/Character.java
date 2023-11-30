@@ -54,7 +54,5 @@ public class Character extends AbstractGameObject{
     }
 
 
-    @Override
-    public void draw(GraphicsContext gc) {
-    }
+
 }

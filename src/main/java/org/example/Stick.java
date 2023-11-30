@@ -1,12 +1,20 @@
 package org.example;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
 
 public class Stick extends AbstractGameObject {
 
     private double length;
     private Pillar pillar;
 
+    private Timeline growTimeline;
+    private boolean isMousePressed;
+
+    private Line stick;
     public Stick(double x, double y, double length, Pillar pillar) {
         super(x, y);
         this.length = length;
@@ -17,6 +25,31 @@ public class Stick extends AbstractGameObject {
     public void update() {
     }
 
+    private void startGrowTimeline(long startTime) {
+        growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
+            stick.setEndY(stick.getEndY() - 5);
+//            lengthOfStick = stick.getEndY() - stick.getStartY();
+        }));
+        growTimeline.setCycleCount(Timeline.INDEFINITE);
+
+        growTimeline.setOnFinished(e -> {
+            if (isMousePressed()) {
+                long currentTime = System.currentTimeMillis();
+                long elapsedTime = currentTime - startTime;
+                int cycles = (int) (elapsedTime / 50);
+                growTimeline.setCycleCount(cycles);
+                growTimeline.playFromStart();
+            }
+        });
+
+
+        growTimeline.play();
+    }
+
+    private boolean isMousePressed() {
+        return growTimeline != null && growTimeline.getStatus() == Timeline.Status.RUNNING;
+    }
+
 
     public double getLength() {
         return length;
@@ -24,10 +57,6 @@ public class Stick extends AbstractGameObject {
 
     public void setLength(double length) {
         this.length = length;
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
     }
 
     public boolean isGrowing(){

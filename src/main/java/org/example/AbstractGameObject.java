@@ -30,8 +30,5 @@ public abstract class AbstractGameObject {
     // Abstract method for updating the game object.
     public abstract void update();
 
-    // Abstract method for drawing the game object.
-    public abstract void draw(GraphicsContext gc);
-
 
 }

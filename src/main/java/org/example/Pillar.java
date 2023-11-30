@@ -32,9 +32,6 @@ public class Pillar extends AbstractGameObject {
         return this.width / 2;
     }
 
-    @Override
-    public void draw(GraphicsContext gc) {
 
-    }
 
 }
