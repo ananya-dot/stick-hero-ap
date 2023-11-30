@@ -8,10 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -34,9 +36,16 @@ public class GamePlayController {
     private double y;
     private boolean isMousePressed;
     private Timeline fallTimeline;
+    @FXML
+    private Rectangle pillar2;
+    @FXML
+    private Rectangle pillar1;
+    private boolean harryMoved;
 
     private Timeline moveCharacterTimeline;
     private Timeline growTimeline;
+    @FXML
+    private Button growButton;
     private long startTime;
     public void switchToPauseMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("PauseMenu.fxml")));
@@ -58,11 +67,54 @@ public class GamePlayController {
 
         stopGrowTimeline();
         startFallTimeline();
+        growButton.setVisible(false);
+        harryMoved = false;
         moveHarry();
+        System.out.println(harryMoved);
+//        initiateFallAnimation();
+//        if(harryMoved) {
+//            checkSafety();
+//            boolean continueMoving = isStickLongEnough();
+//            if (!continueMoving) {
+//                fallHarry();
+//            }
+//        }
+
 //        startMoveCharacterTimeline();
 //        System.out.println("stopped");
     }
 
+    private void fallHarry() {
+
+
+        double totalDistance = pillar2.getHeight();
+
+        Timeline fallCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+
+            double moveStep = 5.0;
+
+
+            if (Math.abs(totalDistance) >= moveStep) {
+
+                if (totalDistance > 0) {
+                    harry.setY(harry.getY() + moveStep);
+                } else {
+                    harry.setY(harry.getY() - moveStep);
+                }
+            }
+
+
+        }));
+        fallCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
+        fallCharacterTimeline.play();
+    }
+
+
+
+    private void checkSafety() {
+        System.out.println(stick.getEndY() - stick.getStartY());
+        System.out.println(pillar2.getX() - pillar1.getX());
+    }
 
 
     private void startGrowTimeline(long startTime) {
@@ -106,7 +158,7 @@ public class GamePlayController {
     private void startFallTimeline() {
         double centerX = stick.getStartX();
         double centerY = stick.getStartY();
-        double radius = stick.getEndY(); // Use the length of the stick as the radius
+        double radius = stick.getEndY();
         lengthOfStick = radius;
 
         fallTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
@@ -135,8 +187,68 @@ public class GamePlayController {
     private void stopFallTimeline() {
         if (fallTimeline != null) {
             fallTimeline.stop();
+            harryMoved = true;
         }
     }
+
+    private boolean isStickLongEnough() {
+
+        double startX = stick.getStartX();
+        double startY = stick.getStartY();
+        double endX = stick.getEndX();
+        double endY = stick.getEndY();
+
+
+        double stickLength = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+
+        double pillarX = pillar2.getX();
+        double pillarY = pillar2.getY();
+        double pillarWidth = pillar2.getWidth();
+        double pillarHeight = pillar2.getHeight();
+
+        double distanceToPillar = Math.sqrt(Math.pow((startX + endX) / 2 - (pillarX + pillarWidth / 2), 2) +
+                Math.pow((startY + endY) / 2 - (pillarY + pillarHeight / 2), 2));
+
+        return stickLength >= distanceToPillar;
+
+    }
+
+
+    private void initiateFallAnimation() {
+        double startX = stick.getStartX();
+        double startY = stick.getStartY();
+        double endY = stick.getEndY();
+
+        double characterY = harry.getY();
+
+        double fallDistance = endY - startY;
+
+        Timeline fallTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+            double fallSpeed = 5.0;
+            double newY = harry.getY() + fallSpeed;
+
+
+            newY = Math.min(newY, startY + fallDistance);
+
+            harry.setY(newY);
+
+            if (newY >= startY + fallDistance) {
+                stopFallTimeline();
+            }
+        }));
+        fallTimeline.setCycleCount(Timeline.INDEFINITE);
+
+        fallTimeline.play();
+    }
+
+//    private void stopFallTimeline() {
+//        // Stop the fall timeline
+//        if (fallTimeline != null) {
+//            fallTimeline.stop();
+//        }
+//    }
+
+
 
 
     @FXML
@@ -146,16 +258,16 @@ public class GamePlayController {
         System.out.println("end y stick - " + stick.getEndY());
 
 
-        // Calculate the total distance to move the character
+
         double totalDistance = -1 * stick.getEndY() - harry.getX();
 
         moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
-            // Calculate the distance to move in each frame
+
             double moveStep = 5.0;
 
-            // Check if there is still distance to cover
+
             if (Math.abs(totalDistance) >= moveStep) {
-                // Update the position of the character based on the moveStep
+
                 if (totalDistance > 0) {
                     harry.setX(harry.getX() + moveStep);
                 } else {
@@ -166,8 +278,6 @@ public class GamePlayController {
             if(harry.getX() >= totalDistance) stopMoveCharacterTimeline();
         }));
         moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
-
-
         moveCharacterTimeline.play();
     }
 

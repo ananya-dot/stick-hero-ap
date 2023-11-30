@@ -25,8 +25,8 @@
          </image>
       </ImageView>
       <Line fx:id="stick" layoutX="42.0" layoutY="243.0" stroke="WHITE" strokeWidth="3.0" />
-      <Button layoutX="272.0" layoutY="260.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
-      <Button layoutX="268.0" layoutY="317.0" mnemonicParsing="false" onAction="#moveHarry" text="Button" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="-1.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+      <Button fx:id="growButton" layoutX="269.0" layoutY="260.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
+      <Rectangle fx:id="pillar1" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="-1.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+      <Rectangle fx:id="pillar2" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="195.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="21.0" />
    </children>
 </AnchorPane>
