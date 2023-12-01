@@ -52,6 +52,7 @@ private Timeline fallCheckTimeline;
     private Timeline growTimeline;
     @FXML
     private Button growButton;
+    private boolean longEnough;
     private long startTime;
     public void switchToPauseMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("PauseMenu.fxml")));
@@ -82,63 +83,51 @@ private Timeline fallCheckTimeline;
 //        if(harryMoved) {
 //            checkSafety();
         boolean continueMoving = isStickLongEnough();
-//        System.out.println(continueMoving);
-//            if (!continueMoving) {
-//
-//                initiateFallAnimation();
-//            }
-//        }
 
-//        startMoveCharacterTimeline();
-//        System.out.println("stopped");
     }
 
     private void fallHarry() {
 
 
-        double totalDistance = pillar2.getHeight();
-//        harry.setY(harry.getY() + totalDistance);
+         double totalDistance = pillar2.getHeight();
+//
 
          fallCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
             double moveStep = 5.0;
 
 
-            if (Math.abs(totalDistance) >= moveStep) {
+            if ((totalDistance) >= moveStep) {
+                harry.setY(harry.getY() + moveStep);
 
-                if (totalDistance > 0) {
-                    harry.setY(harry.getY() + moveStep);
-                }
-//                } else {
-//                    harry.setY(harry.getY() - moveStep);
-//
-//                }
             }
 
-            else{
-                System.out.println("hemlo2");
+            if(harry.getY() >= totalDistance){
+                System.out.println("reached");
                 stopFallCharacterTimeline();
+
             }
+
+//            else{
+////                System.out.println("hemlo2");
+//                stopFallCheckTimeline();
+//                stopFallCharacterTimeline();
+//            }
 
 
         }));
         fallCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
         fallCharacterTimeline.play();
+
     }
 
 
 
-    private void checkSafety() {
-        System.out.println(stick.getEndY() - stick.getStartY());
-        System.out.println(pillar2.getX() - pillar1.getX());
-    }
+
 
 
     private void startGrowTimeline(long startTime) {
-        System.out.println("start x of stick - " + stick.getStartX());
-        System.out.println("start y of stick - " + stick.getStartY());
-        System.out.println("end x of stick - " + stick.getEndX());
-        System.out.println("end y of stick - " + stick.getEndY());
+
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
 //            lengthOfStick = stick.getEndY() - stick.getStartY();
@@ -211,34 +200,19 @@ private Timeline fallCheckTimeline;
 
     private boolean isStickLongEnough() {
 
-        double startX = stick.getStartX();
-        double startY = stick.getStartY();
-        double endX = stick.getEndX();
-        double endY = stick.getEndY();
-        System.out.println("start x " + startX);
-        System.out.println("start y " + startY);
-        System.out.println("end x " + endX);
-        System.out.println("end y " + endY);
 
-//        double stickLength = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+        double endY = stick.getEndY();
+
+
 
         double stickLength = -1 * endY;
         double pillarX = pillar2.getBoundsInParent().getCenterX();
-        double pillarY = pillar2.getBoundsInParent().getCenterY();
+
         double pillarWidth = pillar2.getWidth();
-        double pillarHeight = pillar2.getHeight();
 
         pillarX -= pillarWidth / 2;
-        pillarY += pillarHeight / 2;
 
-        System.out.println("pillar -- ");
 
-        System.out.println(pillarX);
-        System.out.println(pillarY);
-        System.out.println("width " + pillarWidth);
-        System.out.println("height " + pillarHeight);
-
-//        System.out.println();
 
         double distanceToPillar = pillarX - pillar1.getBoundsInParent().getCenterX() - pillar1.getWidth() / 2;
 
@@ -282,10 +256,8 @@ private Timeline fallCheckTimeline;
 
     @FXML
     private void moveHarry() {
-        double endX = -1 * stick.getEndY();
-        System.out.println("end x stick - " + stick.getEndX());
-        System.out.println("end y stick - " + stick.getEndY());
 
+//
 
 
         double totalDistance = -1 * stick.getEndY() - harry.getX();
@@ -310,6 +282,8 @@ private Timeline fallCheckTimeline;
         }));
         moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
         moveCharacterTimeline.play();
+
+        longEnough = isStickLongEnough();
     }
 
     private void stopMoveCharacterTimeline() {
@@ -322,22 +296,21 @@ private Timeline fallCheckTimeline;
     }
 
     private void initializeFallCheckTimeline() {
-        System.out.println("harry-" + harry.getX());
-        System.out.println("stick end - " + -1 * lengthOfStick);
+//
 
+         fallCheckTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
-        Timeline fallCheckTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
-            // Check if Harry has reached the end of the stick
             if (harry.getX() >= -1 * lengthOfStick) {
-                if(!isStickLongEnough()){
-                System.out.println("hemlo");
+//                System.out.println("i am in fall check");
+                if(!longEnough){
+//
+                    fallHarry();
+                    stopFallCheckTimeline();
 
-                stopFallCheckTimeline();
-
-                // Start the fall animation
-                fallHarry();
                 }
-//                stopFallCharacterTimeline();
+
+
+
 
             }
         }));
@@ -346,7 +319,11 @@ private Timeline fallCheckTimeline;
     }
 
     private void stopFallCharacterTimeline() {
-        if(fallCharacterTimeline != null) fallCharacterTimeline.stop();
+        if(fallCharacterTimeline != null) {
+            fallCharacterTimeline.stop();
+            fallCheckTimeline.stop();
+        }
+
     }
 
     private void stopFallCheckTimeline() {
