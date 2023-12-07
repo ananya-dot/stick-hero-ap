@@ -2,6 +2,7 @@ package org.example;
 
 
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -23,7 +24,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class GamePlayController {
     @FXML
@@ -45,7 +48,7 @@ private Timeline fallCheckTimeline;
     private Rectangle pillar2;
     @FXML
     private Rectangle pillar1;
-    private boolean harryMoved;
+    private boolean isGrowing;
     private CompletableFuture<Void> fallFuture;
 
     private Timeline moveCharacterTimeline;
@@ -53,7 +56,11 @@ private Timeline fallCheckTimeline;
     @FXML
     private Button growButton;
     private boolean longEnough;
+
+    private boolean gameStatus;
+    private AnimationTimer gameLoop;
     private long startTime;
+    boolean actionsCompleted;
     public void switchToPauseMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("PauseMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -62,27 +69,100 @@ private Timeline fallCheckTimeline;
         stage.show();
     }
 
+    public void initialize(){
+        gameStatus = true;
+        startGameLoop();
+    }
 
-    public void grow(MouseEvent event) {
+    private void startGameLoop() {
+        gameLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (!actionsCompleted) {
+//                    System.out.println("Actions not completed");
+                    return;
+                }
+
+                CompletableFuture.runAsync(() -> {
+                    Platform.runLater(() -> {
+                        System.out.println("Next statements after actions completed");
+
+                        resetStickAndHarry();
+
+                        growButton.setVisible(true);
+
+                        allowUserActions();
+                    });
+                }).whenComplete((result, throwable) -> {
+                    actionsCompleted = false;
+
+                    // gameStatus = checkGameStatus();
+                });
+
+                if (!gameStatus) {
+                    gameLoop.stop();
+                }
+            }
+        };
+
+        gameLoop.start();
+    }
+
+    private void allowUserActions() {
+        if(isMousePressed){
+            growingActions();
+        }
+        else{
+            stopGrowingActions();
+        }
+    }
+
+    private void resetStickAndHarry() {
+         stick.setEndX(0);
+         stick.setEndY(0);
+         stick.setStartX(0);
+         stick.setStartY(0);
+
+         harry.setX(0);
+         harry.setY(0);
+    }
+
+    private void stopGameLoop() {
+        if (gameLoop != null) {
+            gameLoop.stop();
+        }
+    }
+
+
+
+
+        public void grow(MouseEvent event) {
+        isMousePressed = true;
+        growingActions();
+
+    }
+
+    public void growingActions(){
+//        isGrowing = true;
+        actionsCompleted = false;
         startTime = System.currentTimeMillis();
         startGrowTimeline(startTime);
+
     }
 
     @FXML
-
     public void stopGrowing(MouseEvent event) {
+//        isMousePressed = false;
+        stopGrowingActions();
 
+    }
+
+    public void stopGrowingActions(){
+        isGrowing = false;
         stopGrowTimeline();
         startFallTimeline();
         growButton.setVisible(false);
         moveHarry();
-        double length = -1 * lengthOfStick;
-
-
-//        initiateFallAnimation();
-//        if(harryMoved) {
-//            checkSafety();
-        boolean continueMoving = isStickLongEnough();
 
     }
 
@@ -102,11 +182,17 @@ private Timeline fallCheckTimeline;
 
             }
 
-            if(harry.getY() >= totalDistance){
+            if(harry.getY() == totalDistance){
+//                System.out.println(harry.getY());
                 System.out.println("reached");
+                stopFallCheckTimeline();
                 stopFallCharacterTimeline();
+                actionsCompleted = true;
+                gameStatus = false;
 
             }
+
+
 
 //            else{
 ////                System.out.println("hemlo2");
@@ -228,15 +314,11 @@ private Timeline fallCheckTimeline;
         double fallSpeed = 5.0; // Adjust the fall speed as needed
 
         fallTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
-            // Update the position of the character to simulate a vertical fall
             double newY = harry.getY() + fallSpeed;
 
-            // Limit the fall to the end of the stick
-//            newY = Math.min(newY, endY);
 
             harry.setY(newY);
 
-            // Check if the character has reached the end of the fall, and stop the fall timeline
             if (newY >= endY) {
                 stopFallTimeline();
             }
@@ -278,7 +360,10 @@ private Timeline fallCheckTimeline;
 
             if(harry.getX() >= totalDistance){
 
-            stopMoveCharacterTimeline();}
+
+            stopMoveCharacterTimeline();
+//            actionsCompleted = true;
+            }
         }));
         moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
         moveCharacterTimeline.play();
@@ -303,11 +388,10 @@ private Timeline fallCheckTimeline;
             if (harry.getX() >= -1 * lengthOfStick) {
 //                System.out.println("i am in fall check");
                 if(!longEnough){
-//
                     fallHarry();
                     stopFallCheckTimeline();
-
                 }
+                else actionsCompleted = true;
 
 
 
@@ -335,6 +419,10 @@ private Timeline fallCheckTimeline;
 
 
 
-
-
 }
+
+
+
+
+
+
