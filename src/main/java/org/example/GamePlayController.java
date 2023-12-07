@@ -59,8 +59,10 @@ private Timeline fallCheckTimeline;
 
     private boolean gameStatus;
     private AnimationTimer gameLoop;
-    private long startTime;
+    private long startTime=0;
     boolean actionsCompleted;
+
+    boolean characterHasFallen;
     public void switchToPauseMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("PauseMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -71,7 +73,12 @@ private Timeline fallCheckTimeline;
 
     public void initialize(){
         gameStatus = true;
+//        growButton.setOnMousePressed(event -> growingActions());
+//        growButton.setOnMouseReleased(event -> stopGrowingActions());
         startGameLoop();
+
+
+
     }
 
     private void startGameLoop() {
@@ -79,24 +86,16 @@ private Timeline fallCheckTimeline;
             @Override
             public void handle(long now) {
                 if (!actionsCompleted) {
-//                    System.out.println("Actions not completed");
                     return;
                 }
 
                 CompletableFuture.runAsync(() -> {
                     Platform.runLater(() -> {
-                        System.out.println("Next statements after actions completed");
-
                         resetStickAndHarry();
-
                         growButton.setVisible(true);
-
-                        allowUserActions();
                     });
                 }).whenComplete((result, throwable) -> {
                     actionsCompleted = false;
-
-                    // gameStatus = checkGameStatus();
                 });
 
                 if (!gameStatus) {
@@ -105,28 +104,54 @@ private Timeline fallCheckTimeline;
             }
         };
 
+        // Set OnMousePressed and OnMouseReleased handlers for growButton
+        growButton.setOnMousePressed(event -> growingActions());
+        growButton.setOnMouseReleased(event -> stopGrowingActions());
+
         gameLoop.start();
     }
 
-    private void allowUserActions() {
-        if(isMousePressed){
-            growingActions();
+    private void updateGameState() {
+        // Perform game-related logic here
+
+        // For example, check if the character has fallen
+        if (!characterHasFallen) {
+            gameStatus = true;
+            System.out.println("game going on ");
+            // Perform actions when the character falls, e.g., show game over screen
+//            showGameOverScreen();
         }
-        else{
-            stopGrowingActions();
-        }
+
+        resetStickAndHarry();
+        stick.setVisible(true);
+        growButton.setVisible(true);
+        // Other game logic...
+
+        // Set actionsCompleted to true to indicate that this frame's actions are completed
+        actionsCompleted = true;
     }
+
+
+
 
     private void resetStickAndHarry() {
          stick.setEndX(0);
          stick.setEndY(0);
          stick.setStartX(0);
          stick.setStartY(0);
-
          harry.setX(0);
          harry.setY(0);
+
     }
 
+//    private void moveHarryToNextPillar() {
+//        // Example logic to move harry to the next pillar
+//        double nextPillarX = pillar2.getBoundsInParent().getCenterX() + pillar2.getWidth() / 2 + harry.getFitWidth() / 2;
+//        double nextPillarY = pillar2.getBoundsInParent().getMaxY() - harry.getFitHeight();
+//
+//        harry.setX(nextPillarX);
+//        harry.setY(nextPillarY);
+//    }
     private void stopGameLoop() {
         if (gameLoop != null) {
             gameLoop.stop();
@@ -137,27 +162,35 @@ private Timeline fallCheckTimeline;
 
 
         public void grow(MouseEvent event) {
+            System.out.println("grow function called");
         isMousePressed = true;
         growingActions();
 
     }
 
     public void growingActions(){
+
 //        isGrowing = true;
+        System.out.println("growing action function called");
+
         actionsCompleted = false;
         startTime = System.currentTimeMillis();
-        startGrowTimeline(startTime);
+        startGrowTimeline();
 
     }
 
+
+
     @FXML
     public void stopGrowing(MouseEvent event) {
-//        isMousePressed = false;
+        isMousePressed = false;
+        System.out.println("stop growing function called");
         stopGrowingActions();
 
     }
 
     public void stopGrowingActions(){
+        System.out.println("stop growing actions called");
         isGrowing = false;
         stopGrowTimeline();
         startFallTimeline();
@@ -189,6 +222,7 @@ private Timeline fallCheckTimeline;
                 stopFallCharacterTimeline();
                 actionsCompleted = true;
                 gameStatus = false;
+                characterHasFallen=true;
 
             }
 
@@ -212,13 +246,16 @@ private Timeline fallCheckTimeline;
 
 
 
-    private void startGrowTimeline(long startTime) {
+    private void startGrowTimeline() {
 
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
 //            lengthOfStick = stick.getEndY() - stick.getStartY();
+//            System.out.println("stick length-"+stick.getEndY());
+
         }));
         growTimeline.setCycleCount(Timeline.INDEFINITE);
+//        growTimeline.setAutoReverse(true);
 
         growTimeline.setOnFinished(e -> {
             if (isMousePressed()) {
@@ -226,6 +263,7 @@ private Timeline fallCheckTimeline;
                 long elapsedTime = currentTime - this.startTime;
                 int cycles = (int) (elapsedTime / 50);
                 growTimeline.setCycleCount(cycles);
+                growTimeline.setAutoReverse(false);
                 growTimeline.playFromStart();
             }
         });
@@ -235,6 +273,7 @@ private Timeline fallCheckTimeline;
     }
 
     private void stopGrowTimeline() {
+//        System.out.println("entered stop growing");
 
         if (growTimeline != null) {
             growTimeline.stop();
