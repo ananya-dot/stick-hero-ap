@@ -1,10 +1,7 @@
 package org.example;
 
 
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +90,7 @@ private Timeline fallCheckTimeline;
                     Platform.runLater(() -> {
                         resetStickAndHarry();
                         growButton.setVisible(true);
+                        movePillars();
                     });
                 }).whenComplete((result, throwable) -> {
                     actionsCompleted = false;
@@ -109,6 +107,29 @@ private Timeline fallCheckTimeline;
         growButton.setOnMouseReleased(event -> stopGrowingActions());
 
         gameLoop.start();
+    }
+
+    private void movePillars() {
+        double rightEdgeOfPillar1 = pillar1.getLayoutX() + pillar1.getWidth();
+        double leftEdgeOfPillar2 = pillar2.getLayoutX();
+        double diff = leftEdgeOfPillar2;
+        double durationInMillis = 1000; // Adjust the duration as needed
+        double pixelsToMove = diff; // Adjust the number of pixels to move
+
+        Timeline movePillarsTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(pillar1.layoutXProperty(), pillar1.getLayoutX())),
+                new KeyFrame(Duration.millis(durationInMillis),
+                        new KeyValue(pillar1.layoutXProperty(), pillar1.getLayoutX() - pixelsToMove)),
+                new KeyFrame(Duration.ZERO, new KeyValue(harry.layoutXProperty(), harry.getLayoutX())),
+                new KeyFrame(Duration.millis(durationInMillis),
+                        new KeyValue(harry.layoutXProperty(), harry.getLayoutX() - pixelsToMove)),
+                new KeyFrame(Duration.ZERO, new KeyValue(pillar2.layoutXProperty(), pillar2.getLayoutX())),
+                new KeyFrame(Duration.millis(durationInMillis),
+                        new KeyValue(pillar2.layoutXProperty(), pillar2.getLayoutX() - pixelsToMove))
+
+        );
+
+        movePillarsTimeline.play();
     }
 
     private void updateGameState() {
@@ -139,9 +160,11 @@ private Timeline fallCheckTimeline;
          stick.setEndY(0);
          stick.setStartX(0);
          stick.setStartY(0);
+//         harry.setX(0);
+//         harry.setY(0);
          stick.getTransforms().clear();
-         harry.setX(0);
-         harry.setY(0);
+         harry.getTransforms().clear();
+
 
     }
 
