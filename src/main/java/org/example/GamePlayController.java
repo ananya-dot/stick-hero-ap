@@ -139,6 +139,7 @@ private Timeline fallCheckTimeline;
          stick.setEndY(0);
          stick.setStartX(0);
          stick.setStartY(0);
+         stick.getTransforms().clear();
          harry.setX(0);
          harry.setY(0);
 
