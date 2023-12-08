@@ -248,7 +248,6 @@ private Timeline fallCheckTimeline;
 
     private void startGrowTimeline() {
 
-
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
 //            lengthOfStick = stick.getEndY() - stick.getStartY();
