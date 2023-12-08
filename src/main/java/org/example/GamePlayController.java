@@ -1,7 +1,10 @@
 package org.example;
 
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +44,8 @@ private Timeline fallCheckTimeline;
     private boolean isMousePressed;
     private Timeline fallTimeline;
     private Timeline fallCharacterTimeline;
+
+
     @FXML
     private Rectangle pillar2;
     @FXML
@@ -60,6 +65,7 @@ private Timeline fallCheckTimeline;
     boolean actionsCompleted;
 
     boolean characterHasFallen;
+    boolean characterHasReached;
     public void switchToPauseMenu(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("PauseMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -70,11 +76,7 @@ private Timeline fallCheckTimeline;
 
     public void initialize(){
         gameStatus = true;
-//        growButton.setOnMousePressed(event -> growingActions());
-//        growButton.setOnMouseReleased(event -> stopGrowingActions());
         startGameLoop();
-
-
 
     }
 
@@ -88,9 +90,7 @@ private Timeline fallCheckTimeline;
 
                 CompletableFuture.runAsync(() -> {
                     Platform.runLater(() -> {
-                        resetStickAndHarry();
-                        growButton.setVisible(true);
-                        movePillars();
+                        updateGameState();
                     });
                 }).whenComplete((result, throwable) -> {
                     actionsCompleted = false;
@@ -109,63 +109,30 @@ private Timeline fallCheckTimeline;
         gameLoop.start();
     }
 
-    private void movePillars() {
-        double rightEdgeOfPillar1 = pillar1.getLayoutX() + pillar1.getWidth();
-        double leftEdgeOfPillar2 = pillar2.getLayoutX();
-        double diff = leftEdgeOfPillar2;
-        double durationInMillis = 1000; // Adjust the duration as needed
-        double pixelsToMove = diff; // Adjust the number of pixels to move
-
-        Timeline movePillarsTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(pillar1.layoutXProperty(), pillar1.getLayoutX())),
-                new KeyFrame(Duration.millis(durationInMillis),
-                        new KeyValue(pillar1.layoutXProperty(), pillar1.getLayoutX() - pixelsToMove)),
-                new KeyFrame(Duration.ZERO, new KeyValue(harry.layoutXProperty(), harry.getLayoutX())),
-                new KeyFrame(Duration.millis(durationInMillis),
-                        new KeyValue(harry.layoutXProperty(), harry.getLayoutX() - pixelsToMove)),
-                new KeyFrame(Duration.ZERO, new KeyValue(pillar2.layoutXProperty(), pillar2.getLayoutX())),
-                new KeyFrame(Duration.millis(durationInMillis),
-                        new KeyValue(pillar2.layoutXProperty(), pillar2.getLayoutX() - pixelsToMove))
-
-        );
-
-        movePillarsTimeline.play();
-    }
-
     private void updateGameState() {
-        // Perform game-related logic here
-
-        // For example, check if the character has fallen
         if (!characterHasFallen) {
             gameStatus = true;
             System.out.println("game going on ");
-            // Perform actions when the character falls, e.g., show game over screen
-//            showGameOverScreen();
         }
-
+        if(characterHasReached || characterHasFallen){
+            stick.setVisible(false);
+        }
         resetStickAndHarry();
-        stick.setVisible(true);
-        growButton.setVisible(true);
-        // Other game logic...
-
-        // Set actionsCompleted to true to indicate that this frame's actions are completed
+//        stick.setVisible(true);
+//        growButton.setVisible(true);
         actionsCompleted = true;
     }
 
 
-
-
     private void resetStickAndHarry() {
-         stick.setEndX(0);
-         stick.setEndY(0);
-         stick.setStartX(0);
-         stick.setStartY(0);
-//         harry.setX(0);
-//         harry.setY(0);
-         stick.getTransforms().clear();
-         harry.getTransforms().clear();
-
-
+        stick.getTransforms().clear();
+        stick.setStartX(harry.getX() + 1);
+        stick.setStartY(harry.getY() + 1);
+        stick.setEndX(0);
+        stick.setEndY(0);
+        harry.setX(harry.getX());
+        harry.setY(harry.getY());
+        growButton.setVisible(true);
     }
 
 //    private void moveHarryToNextPillar() {
@@ -183,9 +150,7 @@ private Timeline fallCheckTimeline;
     }
 
 
-
-
-        public void grow(MouseEvent event) {
+    public void grow(MouseEvent event) {
             System.out.println("grow function called");
         isMousePressed = true;
         growingActions();
@@ -194,11 +159,11 @@ private Timeline fallCheckTimeline;
 
     public void growingActions(){
 
-//        isGrowing = true;
         System.out.println("growing action function called");
 
         actionsCompleted = false;
         startTime = System.currentTimeMillis();
+        stick.getTransforms().clear();
         startGrowTimeline();
 
     }
@@ -227,7 +192,6 @@ private Timeline fallCheckTimeline;
 
 
          double totalDistance = pillar2.getHeight();
-//
 
          fallCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
@@ -240,7 +204,6 @@ private Timeline fallCheckTimeline;
             }
 
             if(harry.getY() == totalDistance){
-//                System.out.println(harry.getY());
                 System.out.println("reached");
                 stopFallCheckTimeline();
                 stopFallCharacterTimeline();
@@ -252,12 +215,6 @@ private Timeline fallCheckTimeline;
 
 
 
-//            else{
-////                System.out.println("hemlo2");
-//                stopFallCheckTimeline();
-//                stopFallCharacterTimeline();
-//            }
-
 
         }));
         fallCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -266,20 +223,12 @@ private Timeline fallCheckTimeline;
     }
 
 
-
-
-
-
     private void startGrowTimeline() {
 
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
-//            lengthOfStick = stick.getEndY() - stick.getStartY();
-//            System.out.println("stick length-"+stick.getEndY());
-
         }));
         growTimeline.setCycleCount(Timeline.INDEFINITE);
-//        growTimeline.setAutoReverse(true);
 
         growTimeline.setOnFinished(e -> {
             if (isMousePressed()) {
@@ -291,8 +240,6 @@ private Timeline fallCheckTimeline;
                 growTimeline.playFromStart();
             }
         });
-
-
         growTimeline.play();
     }
 
@@ -343,7 +290,6 @@ private Timeline fallCheckTimeline;
     private void stopFallTimeline() {
         if (fallTimeline != null) {
             fallTimeline.stop();
-//            harryMoved = true;
         }
     }
 
@@ -393,18 +339,8 @@ private Timeline fallCheckTimeline;
     }
 
 
-
-
-
-
-
-
     @FXML
     private void moveHarry() {
-
-//
-
-
         double totalDistance = -1 * stick.getEndY() - harry.getX();
 
         moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
@@ -425,6 +361,7 @@ private Timeline fallCheckTimeline;
 
 
             stopMoveCharacterTimeline();
+            characterHasReached=true;
 //            actionsCompleted = true;
             }
         }));
@@ -444,7 +381,6 @@ private Timeline fallCheckTimeline;
     }
 
     private void initializeFallCheckTimeline() {
-//
 
          fallCheckTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
@@ -469,6 +405,7 @@ private Timeline fallCheckTimeline;
         if(fallCharacterTimeline != null) {
             fallCharacterTimeline.stop();
             fallCheckTimeline.stop();
+            gameStatus=true;
         }
 
     }
