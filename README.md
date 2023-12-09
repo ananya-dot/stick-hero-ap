@@ -24,4 +24,5 @@ The game starts with the **Start Screen**. You have been given two options first
 Follow these steps to run the file:
 1. Add JavaFX Library in the project structures.
 2. Edit the running configuration by adding the **Main Class**, which is the `StickHero.java` and add **VM method** with the JavaFX library folder path. The **VM Path** for **Windows** is `--module-path "\path\to\javafx-sdk-21.0.1\lib" --add-modules javafx.controls,javafx.fxml,javafx.media`; for **Mac & Linux** it is `--module-path /path/to/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javfx.media`.
+3. For JUnit, the system will automatically set its path. 
 
