@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="gamePlayRoot" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.GamePlayController">
    <children>
-      <ImageView fx:id="gameBackGround" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gameBackGround" fitHeight="409.0" fitWidth="623.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/img_2.png" />
          </image>
@@ -29,8 +29,8 @@
       </ImageView>
       <Line fx:id="stick" layoutX="42.0" layoutY="243.0" stroke="WHITE" strokeWidth="3.0" />
       <Button fx:id="growButton" layoutX="268.0" layoutY="102.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
-      <Rectangle fx:id="pillar1" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="-1.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-      <Rectangle fx:id="pillar2" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="168.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="101.0" />
+      <Rectangle fx:id="pillar1" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="167.0" layoutX="-1.0" layoutY="241.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+      <Rectangle fx:id="pillar2" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="167.0" layoutX="168.0" layoutY="241.0" stroke="BLACK" strokeType="INSIDE" width="101.0" />
       <ImageView fx:id="Snitch" fitHeight="31.0" fitWidth="36.0" layoutX="93.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Vectorsnitch.png" />
@@ -41,14 +41,14 @@
             <Image url="@images/Vectorsnitch.png" />
          </image>
       </ImageView>
-      <Text layoutX="6.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score-">
+      <Text layoutX="6.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time-">
          <font>
             <Font name="Press Start 2P Regular" size="13.0" />
          </font>
       </Text>
-      <Label fx:id="scoreText" layoutX="89.0" layoutY="13.0" text="0">
+      <Label fx:id="scoreText" layoutX="77.0" layoutY="13.0" text="0">
          <font>
-            <Font name="Press Start 2P Regular" size="13.0" />
+            <Font name="Press Start 2P Regular" size="14.0" />
          </font>
       </Label>
       <Text layoutX="268.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
