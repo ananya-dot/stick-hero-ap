@@ -361,7 +361,7 @@ public class GamePlayController {
     }
 
     private void hasCollected(double x){
-        if(longEnough){
+        if(isStickLongEnough()){
 //            System.out.println("x-"+x);
 //            System.out.println("snitch X:"+Snitch.getLayoutX());
             if(Snitch.getLayoutX()<x){
