@@ -75,8 +75,6 @@ public class GamePlayController {
     private Timeline movePillarsTimeline;
     @FXML
     private Button growButton;
-    @FXML
-    private Button InvertButton;
     private boolean longEnough;
 
     private boolean gameStatus;
@@ -121,7 +119,7 @@ public class GamePlayController {
         stickX = harry.getBoundsInParent().getMaxX();  // same for stick
         growButton.setOnMousePressed(event -> growingActions());  // setting event handlers for grow button
         growButton.setOnMouseReleased(event -> stopGrowingActions());
-        System.out.println("initialized");
+//        System.out.println("initialized");
         simulateScoreUpdates();
         startGame();
 
@@ -184,7 +182,12 @@ public class GamePlayController {
     private void generateRandomPillar() {   //generate new pilar
         double randomWidth = Math.random() * (150 - 20) + 20;
         double randomDistance = Math.random() * (200 - 20) + 20;
-        Rectangle newPillar = new Rectangle(randomWidth, pillar2.getHeight());
+
+        PillarFactory pillarFactory = new PillarFactory();
+
+//        Rectangle newPillar = new Rectangle(randomWidth, pillar2.getHeight());
+
+        Rectangle newPillar = PillarFactory.getPillar("#b08161", randomWidth, pillar2.getHeight());
 
         newPillar.setLayoutX(pillar2.getBoundsInParent().getMinX() + pillar2.getWidth() + randomDistance);
         newPillar.setLayoutY(pillar2.getLayoutY());
@@ -225,7 +228,7 @@ public class GamePlayController {
 
 
     public void grow(MouseEvent event) {
-        System.out.println("grow function called");
+//        System.out.println("grow function called");
         isMousePressed = true;
         growingActions();
 
@@ -235,7 +238,7 @@ public class GamePlayController {
         growButton.setVisible(true);
 
 //        isGrowing = true;
-        System.out.println("growing action function called");
+//        System.out.println("growing action function called");
         actionsCompleted = false;
         startTime = System.currentTimeMillis();
         startGrowTimeline();
@@ -247,14 +250,14 @@ public class GamePlayController {
     @FXML
     public void stopGrowing(MouseEvent event) {
         isMousePressed = false;
-        System.out.println("stop growing function called");
+//        System.out.println("stop growing function called");
         stopGrowingActions();
 
     }
 
     public void stopGrowingActions(){
         stopGrowTimeline();
-        System.out.println("stop growing actions called");
+//        System.out.println("stop growing actions called");
         isGrowing = false;
         startFallTimeline();
         growButton.setVisible(false);
@@ -264,7 +267,7 @@ public class GamePlayController {
 
     private void fallHarry() {  //making character fall to end of screen
         double totalDistance = pillar2.getHeight();
-        System.out.println(totalDistance + " total distance");
+//        System.out.println(totalDistance + " total distance");
 //        System.out.println(harry.getLayoutY());
 //        System.out.println(gamePlayRoot.getHeight());
 
@@ -276,11 +279,11 @@ public class GamePlayController {
             }
             else{
 //
-                System.out.println("reached");
+//                System.out.println("reached");
                 stopFallCharacterTimeline();
                 gameStatus = false;
             }
-            
+
             actionsCompleted = true;
         }));
 
@@ -295,7 +298,7 @@ public class GamePlayController {
 
         growTimeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
             stick.setEndY(stick.getEndY() - 5);
-            System.out.println("stick is goriwng");
+//            System.out.println("stick is goriwng");
 
 
         }));
@@ -349,11 +352,23 @@ public class GamePlayController {
     }
 
     private void stopFallTimeline() {
-        System.out.println("stop fall stick");
+//        System.out.println("stop fall stick");
         if (fallTimeline != null) {
             fallTimeline.stop();
             moveHarry();
 //            harryMoved = true;
+        }
+    }
+@FXML
+    public void invert(ActionEvent event){
+        if(harry.getLayoutY() < pillar2.getHeight()) {
+            harry.setScaleY(-1);
+            harry.setLayoutY(harry.getLayoutY() + 100);
+        }
+        else{
+            harry.setScaleY(1);
+            harry.setLayoutY(harry.getLayoutY() - 100);
+
         }
     }
 
@@ -361,13 +376,13 @@ public class GamePlayController {
         System.out.println("length of stick" + stick.getEndX());
 //        System.out.println("stick start x" + stick.getStartX());
 //        System.out.println("stick start y" + stick.getStartY());
-        System.out.println("stick end x -> " + stick.getEndX());
+//        System.out.println("stick end x -> " + stick.getEndX());
 //        System.out.println("stick end y " + stick.getEndY());
         double pillar1X = pillar1.getBoundsInParent().getMinX() + pillar1.getWidth();
         double pillar2X = pillar2.getBoundsInParent().getMinX();
         System.out.println("pillar diff" + (pillar2X - pillar1X));
 
-        System.out.println(((-1* stick.getEndX()) - stick.getStartX()) - (pillar2X - pillar1X));
+//        System.out.println(((-1* stick.getEndX()) - stick.getStartX()) - (pillar2X - pillar1X));
 
         //trial
 
@@ -383,8 +398,8 @@ public class GamePlayController {
 
 
     @FXML
-    private void moveHarry() { //move harry to the end of stick
-        System.out.println("called move harry");
+    private void moveHarry() {
+//        System.out.println("called move harry");
 //        System.out.println(deltaHarry);
         boolean flag = (isStickLongEnough());
 
@@ -439,10 +454,10 @@ public class GamePlayController {
 
         if (moveCharacterTimeline != null) {
             moveCharacterTimeline.stop();
-            System.out.println("is stick long enough" + isStickLongEnough());
+//            System.out.println("is stick long enough" + isStickLongEnough());
             if(isStickLongEnough()) {
                 gameStatus = true;
-                System.out.println("stick is long enough");
+//                System.out.println("stick is long enough");
                 resetStick();
                 movePillars();
                 growButton.setVisible(true);
@@ -477,17 +492,6 @@ public class GamePlayController {
 
     }
 
-    public void invert(ActionEvent event){
-            harry.setScaleY(-1);
-            harry.setLayoutY(harry.getLayoutY()+100);
-
-    }
-
-    public void releaseInvert(MouseEvent event){
-            harry.setScaleY(1);
-            harry.setLayoutY(harry.getLayoutY() - 100);
-    }
-
     private void endGame() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EndGameScreen.fxml"));
@@ -503,7 +507,6 @@ public class GamePlayController {
             e.printStackTrace();
         }
     }
-
 
 
 }
