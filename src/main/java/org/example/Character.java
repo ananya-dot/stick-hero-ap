@@ -1,12 +1,29 @@
 package org.example;
 
-import javafx.scene.canvas.GraphicsContext;
+
 import javafx.scene.image.Image;
 
-public class Character extends AbstractGameObject{
+//Singleton Class made for On character
+
+public class Character extends AbstractGameObject {
+
+    private static Character instance;
 
     private Image image;
     private String name;
+
+    private Character(double x, double y, Image image, String name) {
+        super(x, y);
+        this.image = image;
+        this.name = name;
+    }
+
+    public static Character getInstance(double x, double y, Image image, String name) {
+        if (instance == null) {
+            instance = new Character(x, y, image, name);
+        }
+        return instance;
+    }
 
     public Image getImage() {
         return image;
@@ -20,39 +37,28 @@ public class Character extends AbstractGameObject{
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public Character(double x, double y, Image image, String name) {
-        super(x, y);
-        this.image = image;
-        this.name = name;
-
-    }
-
     @Override
     public void update() {
-
+        // Update logic here
     }
 
-    public void walk(){
-
+    public void walk() {
+        // Walking logic here
     }
 
-    public void fall(){
-
+    public void fall() {
+        // Falling logic here
     }
 
-    public void invert(){
-
+    public void invert() {
+        // Inverting logic here
     }
 
-    public void collect(){
-
+    public void collect() {
+        // Collection logic here
     }
-
-
-
 }
