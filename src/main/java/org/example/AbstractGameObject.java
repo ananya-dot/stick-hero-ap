@@ -1,26 +1,34 @@
 package org.example;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
 
 public abstract class AbstractGameObject {
+    protected double x;
+    protected double y;
 
-    protected ImageView imageView;
-
-    public AbstractGameObject(ImageView imageView) {
-        this.imageView=imageView;
+    public AbstractGameObject(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
+    public double getX() {
+        return x;
+    }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
 
     // Abstract method for updating the game object.
     public abstract void update();
 
-    public ImageView getImageView() {
-        return imageView;
-    }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
-    }
 }
