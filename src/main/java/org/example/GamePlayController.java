@@ -58,7 +58,10 @@ public class GamePlayController {
     private int score;
 
     @FXML
-    private Label snitchScore;
+    private Label snitchScoreText;
+
+    private int snitchScore;
+
     private boolean isGrowing;
     private ObservableList<Rectangle> Pillars;
 
@@ -125,6 +128,7 @@ public class GamePlayController {
                         System.out.println("Actions-"+actionsCompleted);
                         System.out.println("run later");
                         movePillars();
+
                         resetStickAndHarry();
                         growButton.setVisible(true);
                     });
@@ -162,6 +166,7 @@ public class GamePlayController {
                 new KeyFrame(Duration.ZERO, new KeyValue(harry.layoutXProperty(), harry.getLayoutX())),
                 new KeyFrame(Duration.millis(durationInMillis),
                         new KeyValue(harry.layoutXProperty(), harry.getLayoutX() - pixelsToMove)),
+
                 new KeyFrame(Duration.ZERO, new KeyValue(originalPillar2.layoutXProperty(), originalPillar2.getLayoutX())),
                 new KeyFrame(Duration.millis(durationInMillis),
                         new KeyValue(originalPillar2.layoutXProperty(), originalPillar2.getLayoutX() - pixelsToMove))
@@ -256,10 +261,16 @@ public class GamePlayController {
 
     private void hasCollected(double x){
         if(longEnough){
+            System.out.println("x-"+x);
+            System.out.println("snitch X:"+Snitch.getLayoutX());
             if(Snitch.getLayoutX()<x){
+                System.out.println("hi");
+
                 if(x - Snitch.getLayoutX() <= 5) {
+                    System.out.println("hi");
                     Snitch.setVisible(false);
-                    snitchScore.setText(Integer.toString(score));
+                    snitchScore++;
+                    snitchScoreText.setText(Integer.toString(snitchScore));
                     System.out.println("hi");
                 }
             }
@@ -287,26 +298,26 @@ public class GamePlayController {
 //    }
 //}
 
-private void spawnNextPillar(){
-    System.out.println("hello pillars");
-    if (currentPillarIndex < Pillars.size()) {
-        Rectangle nextPillar = Pillars.get(currentPillarIndex);
-        double startingY = gamePlayRoot.getHeight(); // Set the starting Y position below the screen
+    private void spawnNextPillar(){
+        System.out.println("hello pillars");
+        if (currentPillarIndex < Pillars.size()) {
+            Rectangle nextPillar = Pillars.get(currentPillarIndex);
+            double startingY = gamePlayRoot.getHeight(); // Set the starting Y position below the screen
 
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), nextPillar);
-        transition.setToY(0); // Move the pillar to the desired Y position                                            //workable
-        transition.setCycleCount(1);
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(2), nextPillar);
+            transition.setToY(0); // Move the pillar to the desired Y position                                            //workable
+            transition.setCycleCount(1);
 
-        // Increment the index for the next pillar after the current animation finishes
-        transition.setOnFinished(event -> {
-            currentPillarIndex++;
-            movePillars(); // Move the next pillar
-        });
+            // Increment the index for the next pillar after the current animation finishes
+            transition.setOnFinished(event -> {
+                currentPillarIndex++;
+                movePillars(); // Move the next pillar
+            });
 
-        // Start the transition animation
-        transition.play();
+            // Start the transition animation
+            transition.play();
+        }
     }
-}
 //private void movePillars() {
 //    System.out.println("hello pillars");
 //    if (currentPillarIndex < Pillars.size()) {
@@ -385,9 +396,11 @@ private void spawnNextPillar(){
 
     private void resetStickAndHarry() {
         stick.getTransforms().clear();
-        harry.getTransforms().clear();
+//        harry.getTransforms().clear();
         stick.setStartX(stick.getStartX());
         stick.setEndX(stick.getStartX());
+        harry.setLayoutX(pillar1.getLayoutX());
+//        System.out.println("harrys layout x" + harry.getLayoutX());
     }
 
 //    public void resetPillars(Rectangle pillarOne,Rectangle pillarTwo){
@@ -698,12 +711,16 @@ private void spawnNextPillar(){
     @FXML
     private void moveHarry() {
         System.out.println("harry moving");
-        System.out.println("pillar1's X:"+pillar1.getX());
-        System.out.println("pillar1's layout X:"+pillar1.getLayoutX());
-        System.out.println("pillar2's X:"+pillar2.getX());
-        System.out.println("pillar2's layout X:"+pillar2.getLayoutX());
+//        System.out.println("pillar1's X:"+pillar1.getX());
+//        System.out.println("pillar1's layout X:"+pillar1.getLayoutX());
+//        System.out.println("pillar2's X:"+pillar2.getX());
+//        System.out.println("pillar2's layout X:"+pillar2.getLayoutX());
 
-        double totalDistance = -1 * stick.getEndY() - harry.getX();
+//        double totalDistance = -1 * stick.getEndY() - harry.getX();
+        double totalDistance = -1 * stick.getEndY() - harry.getLayoutX();
+
+//        System.out.println("stick length" + totalDistance);
+//        System.out.println(harry.getX() + "harry x");
 
         moveCharacterTimeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
 
@@ -713,15 +730,15 @@ private void spawnNextPillar(){
             if (Math.abs(totalDistance) >= moveStep) {
 
                 if (totalDistance > 0) {
-                    harry.setX(harry.getX() + moveStep);
+                    harry.setLayoutX(harry.getLayoutX() + moveStep);
                 } else {
-                    harry.setX(harry.getX() - moveStep);
+                    harry.setLayoutX((harry.getLayoutX() - moveStep));
                 }
             }
-             hasCollected(harry.getX());
+             hasCollected(harry.getLayoutX());
 
 
-            if(harry.getX() >= totalDistance){
+            if(harry.getLayoutX() >= totalDistance){
                 stopMoveCharacterTimeline();
                 actionsCompleted = true;
             }
@@ -782,7 +799,7 @@ private void spawnNextPillar(){
                 }
                 else {
                     actionsCompleted = true;
-                    gameLoop.stop();
+//                    gameLoop.stop();
                 }
 
 

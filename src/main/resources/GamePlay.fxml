@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="gamePlayRoot" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.GamePlayController">
+<AnchorPane fx:id="gamePlayRoot" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.GamePlayController">
    <children>
       <ImageView fx:id="gameBackGround" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,8 +28,38 @@
          </image>
       </ImageView>
       <Line fx:id="stick" layoutX="42.0" layoutY="243.0" stroke="WHITE" strokeWidth="3.0" />
-      <Button fx:id="growButton" layoutX="269.0" layoutY="260.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
+      <Button fx:id="growButton" layoutX="268.0" layoutY="102.0" mnemonicParsing="false" onMousePressed="#grow" onMouseReleased="#stopGrowing" text="grow" />
       <Rectangle fx:id="pillar1" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="-1.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
       <Rectangle fx:id="pillar2" arcHeight="5.0" arcWidth="5.0" fill="#b08161" height="160.0" layoutX="168.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="101.0" />
+      <ImageView fx:id="Snitch" fitHeight="31.0" fitWidth="36.0" layoutX="93.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Vectorsnitch.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="36.0" layoutX="229.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Vectorsnitch.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="6.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score-">
+         <font>
+            <Font name="Press Start 2P Regular" size="13.0" />
+         </font>
+      </Text>
+      <Label fx:id="scoreText" layoutX="89.0" layoutY="13.0" text="0">
+         <font>
+            <Font name="Press Start 2P Regular" size="13.0" />
+         </font>
+      </Label>
+      <Text layoutX="268.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+         <font>
+            <Font name="Press Start 2P Regular" size="13.0" />
+         </font>
+      </Text>
+      <Label fx:id="snitchScoreText" layoutX="288.0" layoutY="18.0" text="0">
+         <font>
+            <Font name="Press Start 2P Regular" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
