@@ -3,9 +3,13 @@ package org.example;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -19,6 +23,7 @@ import java.util.Objects;
 public class StickHero extends Application {
 
     public static MediaPlayer mediaPlayer;
+    public ImageView character;
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -40,6 +45,18 @@ public class StickHero extends Application {
         mediaPlayer.setStopTime(Duration.seconds(50));
         mediaPlayer.play();
     }
+
+//    public static ImageView chooseCharacter() {
+//        return
+//    }
+
+
+
+    public ImageView getCharacter() {
+        return character;
+    }
+
+
 
     public static void main(String[] args) {
         launch(args);
