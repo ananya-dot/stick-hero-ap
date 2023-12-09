@@ -27,7 +27,7 @@ public class StickHero extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-//        addMusic();
+        addMusic();
         Parent startPage = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("StartScreen.fxml")));
         Scene scene = new Scene(startPage);
         primaryStage.setTitle("Stick Hero");

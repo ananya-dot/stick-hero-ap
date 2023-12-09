@@ -3,7 +3,7 @@ package org.example;
 
 import javafx.scene.image.Image;
 
-//Singleton Class made for On character
+//Singleton Class made for character
 
 public class Character extends AbstractGameObject {
 
