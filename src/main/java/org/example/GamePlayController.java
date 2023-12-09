@@ -58,7 +58,9 @@ public class GamePlayController {
     private int score;
 
     @FXML
-    private Label snitchScore;
+    private Label snitchScoreText;
+
+    private int snitchScore;
 
     private boolean isGrowing;
     private ObservableList<Rectangle> Pillars;
@@ -259,10 +261,16 @@ public class GamePlayController {
 
     private void hasCollected(double x){
         if(longEnough){
+            System.out.println("x-"+x);
+            System.out.println("snitch X:"+Snitch.getLayoutX());
             if(Snitch.getLayoutX()<x){
+                System.out.println("hi");
+
                 if(x - Snitch.getLayoutX() <= 5) {
+                    System.out.println("hi");
                     Snitch.setVisible(false);
-                    snitchScore.setText(Integer.toString(score));
+                    snitchScore++;
+                    snitchScoreText.setText(Integer.toString(snitchScore));
                     System.out.println("hi");
                 }
             }
@@ -727,7 +735,7 @@ public class GamePlayController {
                     harry.setLayoutX((harry.getLayoutX() - moveStep));
                 }
             }
-             hasCollected(harry.getX());
+             hasCollected(harry.getLayoutX());
 
 
             if(harry.getLayoutX() >= totalDistance){
