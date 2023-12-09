@@ -11,12 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -49,6 +51,14 @@ public class GamePlayController {
     private Rectangle pillar2;
     @FXML
     private Rectangle pillar1;
+
+    @FXML
+    private Label scoreText;
+
+    private int score;
+
+    @FXML
+    private Label snitchScore;
     private boolean isGrowing;
     private ObservableList<Rectangle> Pillars;
 
@@ -63,11 +73,15 @@ public class GamePlayController {
     private AnimationTimer gameLoop;
     private long startTime=0;
     boolean actionsCompleted;
+    private boolean snitchCollected;
 
     boolean characterHasFallen;
     private int currentPillarIndex = 1; // Tracks the current pillar index
     private Rectangle originalPillar1;
     private Rectangle originalPillar2;
+
+    @FXML
+    private ImageView Snitch;
 
     private Timeline[] growTimelines;
 
@@ -89,6 +103,7 @@ public class GamePlayController {
 //        movePillars();
         originalPillar1 = pillar1;
         originalPillar2 = pillar2;
+        simulateScoreUpdates();
         startGameLoop();
 
 
@@ -237,6 +252,18 @@ public class GamePlayController {
             gamePlayRoot.getChildren().add(rectangle);
         }
 
+    }
+
+    private void hasCollected(double x){
+        if(longEnough){
+            if(Snitch.getLayoutX()<x){
+                if(x - Snitch.getLayoutX() <= 5) {
+                    Snitch.setVisible(false);
+                    snitchScore.setText(Integer.toString(score));
+                    System.out.println("hi");
+                }
+            }
+        }
     }
 
 //private void movePillars() {
@@ -691,6 +718,8 @@ private void spawnNextPillar(){
                     harry.setX(harry.getX() - moveStep);
                 }
             }
+             hasCollected(harry.getX());
+
 
             if(harry.getX() >= totalDistance){
                 stopMoveCharacterTimeline();
@@ -702,6 +731,32 @@ private void spawnNextPillar(){
         moveCharacterTimeline.play();
 
         longEnough = isStickLongEnough();
+
+    }
+
+    private void simulateScoreUpdates() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(500); // Simulating a delay in score update (1 second in this case)
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                score+=1;
+
+                // Update the score on the UI
+                updateScoreLabel();
+            }
+
+        }).start();
+    }
+    private void updateScoreLabel() {
+        // JavaFX UI components should be updated on the JavaFX Application Thread
+        // Use Platform.runLater() to execute the update on the UI thread
+        javafx.application.Platform.runLater(() -> {
+            scoreText.setText(Integer.toString(score));
+        });
     }
 
     private void stopMoveCharacterTimeline() {
