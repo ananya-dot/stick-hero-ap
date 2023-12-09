@@ -427,6 +427,7 @@ private Timeline fallCheckTimeline;
             stopMoveCharacterTimeline();
 //            actionsCompleted = true;
             }
+
         }));
         moveCharacterTimeline.setCycleCount(Timeline.INDEFINITE);
         moveCharacterTimeline.play();
