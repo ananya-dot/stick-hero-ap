@@ -180,7 +180,7 @@ public class GamePlayController {
     }
 
     private void generateRandomPillar() {
-        double randomWidth = Math.random() * (200 - 20) + 20;
+        double randomWidth = Math.random() * (150 - 20) + 20;
         double randomDistance = Math.random() * (200 - 20) + 20;
         Rectangle newPillar = new Rectangle(randomWidth, pillar2.getHeight());
 
@@ -367,7 +367,7 @@ public class GamePlayController {
         double stickLength = ((-1* stick.getEndX()) - stick.getStartX());
         lengthOfStick = stickLength;
         double pillarDiff = (pillar2X - pillar1X);
-        return stickLength >= pillarDiff;
+        return stickLength >= pillarDiff && stickLength <= pillarDiff + pillar2.getWidth();
 
 
 
