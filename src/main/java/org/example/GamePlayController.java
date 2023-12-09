@@ -59,6 +59,7 @@ public class GamePlayController {
 
     @FXML
     private Label snitchScore;
+
     private boolean isGrowing;
     private ObservableList<Rectangle> Pillars;
 
