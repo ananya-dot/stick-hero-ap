@@ -164,6 +164,7 @@ public class GamePlayController {
 
             // Check if pillars and harry have reached the target position
             if (newPillar1X == targetX && newPillar2X == targetX && newHarryX == targetX) {
+                Snitch.setVisible(true);
                 stopMovePillarsTimeline();
             }
         }));
@@ -176,6 +177,7 @@ public class GamePlayController {
     private void stopMovePillarsTimeline() {
         movePillarsTimeline.stop();
         generateRandomPillar();
+        resetStick();
 
     }
 
@@ -198,7 +200,7 @@ public class GamePlayController {
     private void movePillarsToNewPositions(Rectangle newPillar) {
 
         pillar1 = pillar2;
-        pillar1.setVisible(true);
+//        pillar1.setVisible(true);
         pillar2 = newPillar;
     }
 
