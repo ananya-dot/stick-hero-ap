@@ -5,6 +5,7 @@ import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,6 +77,8 @@ public class GamePlayController {
     private Timeline movePillarsTimeline;
     @FXML
     private Button growButton;
+    @FXML
+    private Button InvertButton;
     private boolean longEnough;
 
     private boolean gameStatus;
@@ -494,6 +497,17 @@ public class GamePlayController {
 
     }
 
+    public void invert(ActionEvent event){
+            harry.setScaleY(-1);
+            harry.setLayoutY(harry.getLayoutY()+100);
+
+    }
+
+    public void releaseInvert(MouseEvent event){
+            harry.setScaleY(1);
+            harry.setLayoutY(harry.getLayoutY() - 100);
+    }
+
     private void endGame() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("EndGameScreen.fxml"));
@@ -513,6 +527,7 @@ public class GamePlayController {
             // Handle the exception appropriately (e.g., show an error message)
         }
     }
+
 
 
 }

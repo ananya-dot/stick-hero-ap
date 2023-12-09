@@ -22,7 +22,7 @@
             <Image url="@images/pauseButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="harry" fitHeight="108.0" fitWidth="47.0" layoutX="7.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="harry" fitHeight="108.0" fitWidth="47.0" layoutX="7.0" layoutY="152.0" onKeyReleased="#releaseInvert" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/harryWalk1.png" />
          </image>
@@ -61,5 +61,6 @@
             <Font name="Press Start 2P Regular" size="15.0" />
          </font>
       </Label>
+      <Button fx:id="InvertButton" layoutX="366.0" layoutY="102.0" mnemonicParsing="false" onAction="#invert" text="Invert" />
    </children>
 </AnchorPane>
