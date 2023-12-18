@@ -1,5 +1,5 @@
 # Advanced Programming Project
-# Stick-Hero (Harry Potter Theme)
+# Stick-Hero (Harry Potter Themed)
 
 ## Authors
 - Ananya Sachdev (Roll No. 2022069)
