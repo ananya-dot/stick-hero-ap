@@ -6,15 +6,7 @@
 - Maulik Mahey (Roll No. 2022282)
 
 # Overview
-We have created a Harry Potter-themed stick hero game and added similar and existing features to the stick hero game. Coming to the creativity part, we have added music to the game. 
-As per the programming practices, we have added 3 design patterns and 1 JUnit tests in the following classes:-
-
-1. Design Patterns
-   -> `PillarFactory.java`: Factory & Flyweight
-   -> `Character.java`: Singleton
-
-2. JUnit Tests
-   -> `testScore.java` - Here, we check whether the score starts from zero.
+We have created a Harry Potter-themed stick hero game and added similar and existing features to the stick hero game. Coming to the creativity part, we have added music to the game and made it unique by putting all the features based on harry potter themed.
 
 # Implementation Details
 
