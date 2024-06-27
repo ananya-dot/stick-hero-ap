@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GamePlayController">
+   <ImageView fitHeight="434.0" fitWidth="637.0" layoutX="-4.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/gameBG.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="Dragon" fitHeight="41.0" fitWidth="55.0" layoutX="75.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/StartGame-Dragon.png" />
+      </image>
+   </ImageView>
+   <Line fx:id="stick" endX="-251.9287872314453" endY="52.31884765625" layoutX="300.0" layoutY="211.0" onKeyPressed="#stickGrow" onKeyReleased="#stickGrow" startX="-251.9287872314453" startY="53.0" stroke="#859eb7" strokeWidth="2.0" />
+   <ImageView fx:id="pillar1" fitHeight="150.0" fitWidth="50.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pill1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="pillar2" fitHeight="150.0" fitWidth="83.0" layoutX="122.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pill2.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="pillar3" fitHeight="150.0" fitWidth="101.0" layoutX="277.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pill3.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="pillar4" fitHeight="150.0" fitWidth="15.0" layoutX="427.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pill4.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="pillar5" fitHeight="150.0" fitWidth="32.0" layoutX="539.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pill5.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="harryStick2" fitHeight="113.0" fitWidth="75.0" layoutX="-2.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Harry_Stick-2 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="harryStick1" fitHeight="102.0" fitWidth="58.0" layoutX="-4.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Harry_Stick-1 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="harry2" fitHeight="120.0" fitWidth="50.0" layoutX="-1.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@images/harryWalk2.png" />
+   </ImageView>
+   <ImageView fx:id="harry1" fitHeight="120.0" fitWidth="50.0" layoutX="-1.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@images/harryWalk1.png" />
+   </ImageView>
+   <ImageView fitHeight="45.0" fitWidth="41.0" layoutX="537.0" layoutY="8.0" onMouseClicked="#switchToPauseMenu" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/pauseButton.png" />
+      </image>
+   </ImageView>
+   <Text layoutX="15.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time-">
+      <font>
+         <Font name="Press Start 2P Regular" size="13.0" />
+      </font>
+   </Text>
+   <Label fx:id="timescoreText" layoutX="84.0" layoutY="21.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="14.0" />
+      </font>
+   </Label>
+   <ImageView fx:id="ronStick2" fitHeight="93.0" fitWidth="82.0" layoutX="-3.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/RonStick2.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="ronStick1" fitHeight="97.0" fitWidth="64.0" layoutX="-7.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/RonStick1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="ron2" fitHeight="101.0" fitWidth="62.0" layoutX="-3.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/RonWalk2.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="ron1" fitHeight="95.0" fitWidth="48.0" layoutX="5.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/RonWalk1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="hermioneStick1" fitHeight="112.0" fitWidth="55.0" layoutX="-3.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/HermioneStick1 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="hermioneStick2" fitHeight="104.0" fitWidth="86.0" layoutX="-1.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/HermioneStick2 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="hermione2" fitHeight="100.0" fitWidth="48.0" layoutX="7.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/HermioneWalk2 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="hermione1" fitHeight="102.0" fitWidth="44.0" layoutX="7.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/HermioneWalk1 1.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="31.0" fitWidth="36.0" layoutX="243.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Vectorsnitch.png" />
+      </image>
+   </ImageView>
+   <Text layoutX="281.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+      <font>
+         <Font name="Press Start 2P Regular" size="13.0" />
+      </font>
+   </Text>
+   <Label fx:id="snitchScoreText" layoutX="299.0" layoutY="24.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="15.0" />
+      </font>
+   </Label>
+   <ImageView fx:id="Snitch" fitHeight="26.0" fitWidth="31.0" layoutX="65.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" scaleZ="-3.0">
+      <image>
+         <Image url="@images/Vectorsnitch.png" />
+      </image>
+   </ImageView>
+   <Text layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score-">
+      <font>
+         <Font name="Press Start 2P Regular" size="13.0" />
+      </font>
+   </Text>
+   <Label fx:id="scoreText" layoutX="97.0" layoutY="43.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="14.0" />
+      </font>
+   </Label>
+   <ImageView fx:id="endScroll" fitHeight="363.0" fitWidth="247.0" layoutX="181.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/GameOver.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="endTimeLabel" fitHeight="19.0" fitWidth="75.0" layoutX="239.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/gameOver-Time.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="endScoreLabel" fitHeight="19.0" fitWidth="97.0" layoutX="235.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/gameOver-Score.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="endSnitch" fitHeight="39.0" fitWidth="34.0" layoutX="260.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Vectorsnitch.png" />
+      </image>
+   </ImageView>
+   <Text fx:id="endDash" layoutX="296.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+      <font>
+         <Font name="Press Start 2P Regular" size="13.0" />
+      </font>
+   </Text>
+   <ImageView fx:id="endMainMenu" fitHeight="33.0" fitWidth="106.0" layoutX="252.0" layoutY="256.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/EndGame-Restart.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="endExit" fitHeight="39.0" fitWidth="62.0" layoutX="271.0" layoutY="293.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/PauseMenu-Exit.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="endRestart" fitHeight="26.0" fitWidth="93.0" layoutX="253.0" layoutY="227.0" onMouseClicked="#restart" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Group%2018EndGame-Restart.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="endTime" layoutX="318.0" layoutY="128.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="14.0" />
+      </font>
+   </Label>
+   <Label fx:id="endScore" layoutX="338.0" layoutY="164.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="14.0" />
+      </font>
+   </Label>
+   <Label fx:id="endSnitchScore" layoutX="315.0" layoutY="206.0" text="0">
+      <font>
+         <Font name="Press Start 2P Regular" size="14.0" />
+      </font>
+   </Label>
+</AnchorPane>

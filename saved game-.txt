@@ -1,0 +1,9 @@
+saved game-
+1. Current Character
+2. current pillar
+3. next pillar
+4. stick's layout
+5. score 
+6. time
+7. snitch score
+8. visibility of each images and text

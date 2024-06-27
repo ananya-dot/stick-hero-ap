@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/mauli/IdeaProjects/StickHero/src/main/java/com/example/stickhero</OriginalElement>
+  <nodes>
+    <node x="475.5" y="2062.5">com.example.stickhero.SceneController</node>
+    <node x="336.0" y="-13.5">com.example.stickhero.Characters</node>
+    <node x="480.5" y="4773.0">com.example.stickhero.HowToPlayController</node>
+    <node x="378.0" y="3866.5">com.example.stickhero.StickHero</node>
+    <node x="-108.0" y="872.5">com.example.stickhero.Ron</node>
+    <node x="127.5" y="4690.5">com.example.stickhero.CharacterController</node>
+    <node x="114.5" y="632.5">com.example.stickhero.Hermione</node>
+    <node x="367.0" y="872.5">com.example.stickhero.Harry</node>
+    <node x="738.0" y="3190.5">com.example.stickhero.GamePlayController</node>
+    <node x="808.5" y="722.5">com.example.stickhero.Pillars</node>
+    <node x="519.0" y="1222.5">com.example.stickhero.PauseMenuController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.stickhero.PauseMenuController" target="com.example.stickhero.SceneController" relationship="CREATE">
+      <point x="0.0" y="361.5" />
+      <point x="661.0" y="2024.0" />
+      <point x="641.0" y="2024.0" />
+      <point x="0.0" y="-481.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.Pillars" relationship="TO_ONE">
+      <point x="121.5" y="-733.5" />
+      <point x="1102.5" y="3164.0" />
+      <point x="1121.0" y="3164.0" />
+      <point x="1121.0" y="1124.0" />
+      <point x="1127.25" y="1124.0" />
+      <point x="106.25" y="181.5" />
+    </edge>
+    <edge source="com.example.stickhero.PauseMenuController" target="com.example.stickhero.Characters" relationship="TO_ONE">
+      <point x="0.0" y="-361.5" />
+      <point x="661.0" y="1184.0" />
+      <point x="781.0" y="1184.0" />
+      <point x="781.0" y="704.0" />
+      <point x="1021.0" y="704.0" />
+      <point x="1021.0" y="564.0" />
+      <point x="711.0" y="564.0" />
+      <point x="150.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.Pillars" relationship="CREATE">
+      <point x="-121.5" y="-733.5" />
+      <point x="859.5" y="3164.0" />
+      <point x="641.0" y="3164.0" />
+      <point x="641.0" y="3084.0" />
+      <point x="921.0" y="3084.0" />
+      <point x="921.0" y="1564.0" />
+      <point x="914.75" y="1564.0" />
+      <point x="-106.25" y="181.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.Characters" relationship="CREATE">
+      <point x="-121.5" y="-733.5" />
+      <point x="859.5" y="3164.0" />
+      <point x="641.0" y="3164.0" />
+      <point x="641.0" y="3084.0" />
+      <point x="-139.0" y="3084.0" />
+      <point x="-139.0" y="584.0" />
+      <point x="411.0" y="584.0" />
+      <point x="-150.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.Hermione" target="com.example.stickhero.Characters" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.5" />
+      <point x="321.0" y="604.0" />
+      <point x="561.0" y="604.0" />
+      <point x="0.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.SceneController" relationship="CREATE">
+      <point x="-121.5" y="-733.5" />
+      <point x="859.5" y="3164.0" />
+      <point x="641.0" y="3164.0" />
+      <point x="641.0" y="3144.0" />
+      <point x="561.0" y="3144.0" />
+      <point x="561.0" y="3064.0" />
+      <point x="558.25" y="3064.0" />
+      <point x="-82.75" y="481.5" />
+    </edge>
+    <edge source="com.example.stickhero.Harry" target="com.example.stickhero.Characters" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.PauseMenuController" target="com.example.stickhero.Pillars" relationship="TO_ONE">
+      <point x="0.0" y="-361.5" />
+      <point x="661.0" y="1184.0" />
+      <point x="781.0" y="1184.0" />
+      <point x="781.0" y="1144.0" />
+      <point x="1121.0" y="1144.0" />
+      <point x="1121.0" y="1124.0" />
+      <point x="1127.25" y="1124.0" />
+      <point x="106.25" y="181.5" />
+    </edge>
+    <edge source="com.example.stickhero.CharacterController" target="com.example.stickhero.SceneController" relationship="CREATE">
+      <point x="0.0" y="-193.5" />
+      <point x="281.0" y="3844.0" />
+      <point x="561.0" y="3844.0" />
+      <point x="561.0" y="3064.0" />
+      <point x="558.25" y="3064.0" />
+      <point x="-82.75" y="481.5" />
+    </edge>
+    <edge source="com.example.stickhero.HowToPlayController" target="com.example.stickhero.SceneController" relationship="TO_ONE">
+      <point x="80.25" y="-111.0" />
+      <point x="721.25" y="3124.0" />
+      <point x="721.0" y="3124.0" />
+      <point x="721.0" y="3064.0" />
+      <point x="723.75" y="3064.0" />
+      <point x="82.75" y="481.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.SceneController" relationship="TO_ONE">
+      <point x="121.5" y="-733.5" />
+      <point x="1102.5" y="3164.0" />
+      <point x="1121.0" y="3164.0" />
+      <point x="1121.0" y="3104.0" />
+      <point x="721.0" y="3104.0" />
+      <point x="721.0" y="3064.0" />
+      <point x="723.75" y="3064.0" />
+      <point x="82.75" y="481.5" />
+    </edge>
+    <edge source="com.example.stickhero.GamePlayController" target="com.example.stickhero.Characters" relationship="TO_ONE">
+      <point x="121.5" y="-733.5" />
+      <point x="1102.5" y="3164.0" />
+      <point x="1121.0" y="3164.0" />
+      <point x="1121.0" y="3144.0" />
+      <point x="1261.0" y="3144.0" />
+      <point x="1261.0" y="704.0" />
+      <point x="1021.0" y="704.0" />
+      <point x="1021.0" y="564.0" />
+      <point x="711.0" y="564.0" />
+      <point x="150.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.Ron" target="com.example.stickhero.Characters" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.5" />
+      <point x="81.0" y="604.0" />
+      <point x="561.0" y="604.0" />
+      <point x="0.0" y="277.5" />
+    </edge>
+    <edge source="com.example.stickhero.PauseMenuController" target="com.example.stickhero.SceneController" relationship="TO_ONE">
+      <point x="-94.66666666666666" y="361.5" />
+      <point x="566.3333333333334" y="2024.0" />
+      <point x="530.6666666666666" y="2024.0" />
+      <point x="-110.33333333333337" y="-481.5" />
+    </edge>
+    <edge source="com.example.stickhero.SceneController" target="com.example.stickhero.PauseMenuController" relationship="TO_ONE">
+      <point x="110.33333333333334" y="-481.5" />
+      <point x="751.3333333333334" y="2024.0" />
+      <point x="755.6666666666666" y="2024.0" />
+      <point x="94.66666666666666" y="361.5" />
+    </edge>
+    <edge source="com.example.stickhero.HowToPlayController" target="com.example.stickhero.SceneController" relationship="CREATE">
+      <point x="-80.25" y="-111.0" />
+      <point x="560.75" y="3844.0" />
+      <point x="561.0" y="3844.0" />
+      <point x="561.0" y="3064.0" />
+      <point x="558.25" y="3064.0" />
+      <point x="-82.75" y="481.5" />
+    </edge>
+    <edge source="com.example.stickhero.Pillars" target="com.example.stickhero.Characters" relationship="TO_ONE">
+      <point x="0.0" y="-181.5" />
+      <point x="1021.0" y="564.0" />
+      <point x="711.0" y="564.0" />
+      <point x="150.0" y="277.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.11365414710485133" showDependencies="true" x="571.0" y="2541.9999999999995" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

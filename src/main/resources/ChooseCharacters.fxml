@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.CharacterController">
+    <children>
+      <ImageView fitHeight="400.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Group%2032StartGame-bg.png" />
+         </image>
+      </ImageView>
+        <ImageView fx:id="harryAvatar" fitHeight="24.0" fitWidth="94.0" layoutX="88.0" layoutY="238.0" onMouseClicked="#spawnHarry" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/harryButton.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ronAvatar" fitHeight="24.0" fitWidth="94.0" layoutX="276.0" layoutY="238.0" onMouseClicked="#spawnRon" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/ronButton.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="hermioneAvatar" fitHeight="24.0" fitWidth="106.0" layoutX="437.0" layoutY="238.0" onMouseClicked="#spawnHermione" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/hermioneButton.png" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="207.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ChooseCharacter-Board.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="120.0" layoutX="67.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ChooseCharacter-Square.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="120.0" layoutX="248.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ChooseCharacter-Square.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="120.0" layoutX="429.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ChooseCharacter-Square.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="120.0" layoutX="249.0" layoutY="327.0" onMouseClicked="#switchToGamePlay" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/ChooseCharacter-NextButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Harry" fitHeight="143.0" fitWidth="63.0" layoutX="99.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/HarryFront.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Ron" fitHeight="150.0" fitWidth="63.0" layoutX="279.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/RonFront.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Hermione" fitHeight="143.0" fitWidth="59.0" layoutX="460.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/HermioneFront.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

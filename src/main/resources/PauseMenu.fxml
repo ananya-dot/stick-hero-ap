@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.PauseMenuController">
+   <ImageView fitHeight="434.0" fitWidth="637.0" layoutX="-4.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/gameBG.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="pauseMenu" fitHeight="363.0" fitWidth="247.0" layoutX="180.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Pause-Pause Menu.png" />
+      </image>
+   </ImageView>
+    <ImageView fitHeight="43.0" fitWidth="90.0" layoutX="250.0" layoutY="220.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@images/PauseMenu-Exit.png" />
+        </image>
+    </ImageView>
+   <ImageView fitHeight="29.0" fitWidth="122.0" layoutX="237.0" layoutY="168.0" onMouseClicked="#switchToGamePlay" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/Group%2018EndGame-Restart.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="35.0" fitWidth="138.0" layoutX="233.0" layoutY="126.0" onMouseClicked="#switchToGame" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@images/PauseMenu-Resume.png" />
+      </image>
+   </ImageView>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <effect>
+        <Blend />
+    </effect>
+</AnchorPane>
