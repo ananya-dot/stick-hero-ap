@@ -1,10 +1,6 @@
 # Advanced Programming Project
 # Stick-Hero (Harry Potter Themed)
 
-## Authors
-- Ananya Sachdev (Roll No. 2022069)
-- Maulik Mahey (Roll No. 2022282)
-
 # Overview
 We have created a Harry Potter-themed stick hero game and added similar and existing features to the stick hero game. Coming to the creativity part, we have added music to the game. 
 As per the programming practices, we have added 3 design patterns and 1 JUnit tests in the following classes:-
@@ -26,3 +22,6 @@ Follow these steps to run the file:
 2. Edit the running configuration by adding the **Main Class**, which is the `StickHero.java` and add **VM method** with the JavaFX library folder path. The **VM Path** for **Windows** is `--module-path "\path\to\javafx-sdk-21.0.1\lib" --add-modules javafx.controls,javafx.fxml,javafx.media`; for **Mac & Linux** it is `--module-path /path/to/javafx-sdk-21.0.1/lib --add-modules javafx.controls,javafx.fxml,javfx.media`.
 3. For JUnit, the system will automatically set its path. 
 
+# Demo
+
+A demo video of this game can be accessed here: https://drive.google.com/file/d/1mtopmGfU7BKGjlBExd_QcwW2vq_g_UyT/view?usp=sharing
