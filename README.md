@@ -1,5 +1,5 @@
 # Advanced Programming Project
-# Stick-Hero (Harry Potter Themed)
+# Harry Potter Themed Stick-Hero 
 
 # Overview
 We have created a Harry Potter-themed stick hero game and added similar and existing features to the stick hero game. Coming to the creativity part, we have added music to the game. 
